@@ -1,0 +1,12 @@
+[Unit]
+Description=Hyper-V VSS Daemon
+ConditionVirtualization=microsoft
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/hv_vss_daemon -n
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target

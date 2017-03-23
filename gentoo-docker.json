@@ -1,0 +1,76 @@
+{
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/netfs.sh",
+        "scripts/docker.sh",
+        "scripts/cleanup.sh"
+      ],
+      "execute_command": "sudo '{{ .Path }}'"
+    }
+  ],
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_command": [
+        "<enter><wait10>",
+        "40<enter><wait10><wait10><wait10>",
+        "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
+        "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
+        "chmod +x provision_gentoo.sh && ./provision_gentoo.sh<enter>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": 32768,
+      "http_directory": ".",
+      "guest_os_type": "Gentoo_64",
+      "headless": "true",
+      "iso_url": "http://sd.ai/gentoo.php",
+      "iso_checksum_type": "none",
+      "communicator": "ssh",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_timeout": "4h",
+      "shutdown_command": "sudo systemctl poweroff",
+      "vm_name": "gentoo-docker",
+      "guest_additions_mode": "disable",
+      "vboxmanage": [
+        ["modifyvm", "{{.Name}}", "--memory", "4096"],
+        ["modifyvm", "{{.Name}}", "--cpus", "4"]
+      ]
+    },
+    {
+      "type": "hyperv-iso",
+      "boot_command": [
+        "<enter><wait10>",
+        "40<enter><wait10><wait10><wait10>",
+        "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
+        "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
+        "chmod +x provision_gentoo.sh && ./provision_gentoo.sh<enter>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": 32768,
+      "http_directory": ".",
+      "iso_url": "http://sd.ai/gentoo.php",
+      "iso_checksum_type": "none",
+      "communicator": "ssh",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_timeout": "4h",
+      "shutdown_command": "sudo systemctl poweroff",
+      "vm_name": "gentoo-docker",
+      "generation": 1,
+      "ram_size": "4096",
+      "enable_dynamic_memory": false,
+      "cpu": 4
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant",
+      "output": "boxen/gentoo-docker-{{.Provider}}.box"
+    }
+  ]
+}

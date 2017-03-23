@@ -1,0 +1,12 @@
+[Unit]
+Description=Hyper-V File Copy Protocol Daemon
+ConditionVirtualization=microsoft
+
+[Service]
+Type=simple
+ExecStart=/usr/sbin/hv_fcopy_daemon -n
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
