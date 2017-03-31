@@ -1,11 +1,26 @@
 {
+  "variables": {
+    "token": "{{env `VAGRANT_CLOUD_TOKEN`}}",
+    "version": "{{env `VAGRANT_BOX_VERSION`}}"
+  },
   "provisioners": [
     {
       "type": "shell",
       "scripts": [
         "scripts/netfs.sh",
-        "scripts/cleanup.sh"
+        "scripts/get_versions.sh"
       ],
+      "execute_command": "sudo '{{ .Path }}'"
+    },
+    {
+      "type": "file",
+      "source": "/tmp/versions/",
+      "destination": "./tmp",
+      "direction": "download"
+    },
+    {
+      "type": "shell",
+      "script": "scripts/cleanup.sh",
       "execute_command": "sudo '{{ .Path }}'"
     }
   ],
@@ -14,7 +29,8 @@
       "type": "virtualbox-iso",
       "boot_command": [
         "<enter><wait10>",
-        "40<enter><wait10><wait10><wait10>",
+        "40<enter><wait10>",
+        "<wait10><wait10>",
         "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
         "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
         "chmod +x provision_gentoo.sh && ./provision_gentoo.sh<enter>"
@@ -43,10 +59,10 @@
       "type": "hyperv-iso",
       "boot_command": [
         "<enter><wait10>",
-        "40<enter><wait10><wait10><wait10>",
+        "40<enter><wait10>",
+        "<wait10><wait10>",
         "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
-        "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
-        "chmod +x provision_gentoo.sh && ./provision_gentoo.sh<enter>"
+        "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>"
       ],
       "boot_wait": "10s",
       "disk_size": 32768,
@@ -67,9 +83,18 @@
     }
   ],
   "post-processors": [
-    {
-      "type": "vagrant",
-      "output": "boxen/gentoo-minimal-{{.Provider}}.box"
-    }
+    [
+      {
+        "type": "vagrant",
+        "output": "boxen/gentoo-minimal-{{.Provider}}.box"
+      },
+      {
+        "type": "vagrant-cloud",
+        "access_token": "{{user `token`}}",
+        "box_tag": "symbols/gentoo-minimal",
+        "version": "{{user `version`}}",
+        "no_release": true
+      }
+    ]
   ]
 }

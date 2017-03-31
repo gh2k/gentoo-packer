@@ -36,7 +36,7 @@ fi
 # Build the kernel with genkernel
 echo "Building the kernel"
 
-genkernel --kernel-config=/etc/kernels/kernel_config all
+genkernel --kernel-config=/etc/kernels/kernel_config --makeopts=-j5 all
 
 # Build & install the VM tools
 
