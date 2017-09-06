@@ -74,7 +74,8 @@ mkdir -p /mnt/gentoo/etc/portage/package.use
 touch /mnt/gentoo/etc/portage/package.accept_keywords/zzz-autounmask
 touch /mnt/gentoo/etc/portage/package.use/zzz-autounmask
 
-echo "sys-kernel/gentoo-sources ~amd64" > /mnt/gentoo/etc/portage/package.accept_keywords/kernel
+echo "sys-kernel/gentoo-sources" > /mnt/gentoo/etc/portage/package.accept_keywords/kernel
+
 echo "sys-kernel/gentoo-sources symlink experimental" > /mnt/gentoo/etc/portage/package.use/kernel
 echo "sys-boot/grub efiemu -fonts -nls -themes" > /mnt/gentoo/etc/portage/package.use/grub
 echo "sys-apps/systemd nat" > /mnt/gentoo/etc/portage/package.use/systemd
