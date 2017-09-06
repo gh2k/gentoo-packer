@@ -1,0 +1,7 @@
+# some important tools for diagnosis, rescue &c.
+net-analyzer/iftop
+sys-process/lsof
+sys-process/iotop
+net-analyzer/tcpdump
+app-misc/screen
+app-editors/vim

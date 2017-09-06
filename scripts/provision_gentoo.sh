@@ -60,7 +60,7 @@ echo "Setting up chroot configuration"
 # configure portage
 cat >> /mnt/gentoo/etc/portage/make.conf <<EOT
 MAKEOPTS="-j5"
-EMERGE_DEFAULT_OPTS="--quiet-build --autounmask-continue"
+EMERGE_DEFAULT_OPTS="--quiet-build --jobs=4 --load-average=4 --autounmask-continue"
 EOT
 
 # use systemd
@@ -104,6 +104,9 @@ mkdir -p /mnt/gentoo/usr/lib/systemd/system
 wget ${CONFIG_SERVER_URI}/gentoo/hv_fcopy_daemon.service -O /mnt/gentoo/usr/lib/systemd/system/hv_fcopy_daemon.service
 wget ${CONFIG_SERVER_URI}/gentoo/hv_vss_daemon.service -O /mnt/gentoo/usr/lib/systemd/system/hv_vss_daemon.service
 wget ${CONFIG_SERVER_URI}/gentoo/hv_kvp_daemon.service -O /mnt/gentoo/usr/lib/systemd/system/hv_kvp_daemon.service
+
+mkdir -p /mnt/gentoo/etc/portage/sets
+wget ${CONFIG_SERVER_URI}/gentoo/tools -O /mnt/gentoo/etc/portage/sets/tools
 
 # enter the chroot and run the in-chroot script
 echo "Entering chroot"

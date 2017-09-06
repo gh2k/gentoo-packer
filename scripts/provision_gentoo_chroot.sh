@@ -116,8 +116,14 @@ echo "Installing bootloader"
 grub-install /dev/sda
 grub-mkconfig -o /boot/grub/grub.cfg
 
+echo "Installing additional tools"
+emerge @tools
+
 echo "Updating resolv.conf"
 
 rm /etc/resolv.conf
 ln -s /run/systemd/resolve/resolv.conf /etc/resolv.conf
 systemctl enable systemd-resolved.service
+
+echo "Removing provision script"
+rm /root/provision_gentoo_chroot.sh
