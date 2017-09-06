@@ -75,7 +75,8 @@ emerge net-misc/dhcpcd sys-process/cronie app-admin/sudo
 
 # systemd setup and hostname
 systemd-machine-id-setup
-echo "gentoo-minimal.local" > /etc/hostname
+echo "gentoo-minimal" > /etc/hostname
+echo "127.0.1.1 gentoo-minimal.local gentoo-minimal" >> /etc/hosts
 
 # networking
 cat > /etc/systemd/network/50-dhcp.network <<EOT
