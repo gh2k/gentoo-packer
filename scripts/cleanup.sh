@@ -30,9 +30,23 @@ mkswap /dev/sda2
 
 echo "Remounting root filesystem read-only"
 
-systemctl stop hv_kvp_daemon.service
-systemctl stop systemd-journald.socket
-systemctl stop systemd-journald.service
+if [ "$(dmidecode -s system-product-name)" == "VMware Virtual Platform" ]; then
+  systemctl stop vmtoolsd.service
+fi
+
+for service in hv_kvp_daemon.service \
+  systemd-resolved.service \
+  systemd-networkd.socket \
+  systemd-networkd.service \
+  systemd-journald.socket \
+  systemd-journald-dev-log.socket \
+  systemd-journald-audit.socket \
+  systemd-journald.service \
+  dbus.socket \
+  dbus.service
+do
+  systemctl stop $service
+done
 
 mount -o remount,ro /
 
