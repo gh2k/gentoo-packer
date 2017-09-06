@@ -78,10 +78,10 @@ def update_version_description(box, version, token)
   true
 end
 
-def build(box, token)
+def build(box, token, build)
   new_version = add_new_version(box, token)
 
-  system({'VAGRANT_BOX_VERSION' => new_version.to_s}, "packer build #{box}.json")
+  system({'VAGRANT_BOX_VERSION' => new_version.to_s}, "packer build -on-error=ask #{build ? "-only=#{build}" : ""} #{box}.json")
 
   update_version_description(box, new_version, token)
 

@@ -1,6 +1,6 @@
 # gentoo-minimal
 
-This is a minimal Gentoo install for both virtualbox and hyperv, based on systemd. Guest tools are installed and the kernel is optimised for running as a VM guest.
+This is a minimal Gentoo install for vmware, virtualbox and hyperv, based on systemd. Guest tools are installed and the kernel is optimised for running as a VM guest.
 
 This is a rolling release, and the kernel for the current build is `{{kernel_version}}`.
 

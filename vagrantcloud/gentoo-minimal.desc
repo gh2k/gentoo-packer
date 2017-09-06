@@ -1,1 +1,1 @@
-Rolling Gentoo image for hyperv and virtualbox, with a VM-optimised kernel (currently: {{kernel_version}})
+Rolling Gentoo image for vmware, hyperv and virtualbox, with a VM-optimised kernel (currently: {{kernel_version}})

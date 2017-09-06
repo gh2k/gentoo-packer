@@ -56,6 +56,35 @@
       ]
     },
     {
+      "type": "vmware-iso",
+      "boot_command": [
+        "<enter><wait10>",
+        "40<enter><wait10><wait10><wait10>",
+        "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
+        "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
+        "chmod +x provision_gentoo.sh && ./provision_gentoo.sh<enter>"
+      ],
+      "boot_wait": "10s",
+      "disk_size": 32768,
+      "http_directory": ".",
+      "guest_os_type": "other3xlinux-64",
+      "headless": "true",
+      "iso_url": "http://sd.ai/gentoo.php",
+      "iso_checksum_type": "none",
+      "communicator": "ssh",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_timeout": "4h",
+      "shutdown_command": "sudo systemctl poweroff",
+      "vm_name": "gentoo-docker",
+      "vmx_data": {
+        "cpuid.coresPerSocket": "1",
+	      "memsize": "4096",
+	      "numvcpus": "4"
+      }
+    },
+    {
       "type": "hyperv-iso",
       "boot_command": [
         "<enter><wait10>",

@@ -1,6 +1,8 @@
-# gentoo-docker
+# gentoo-docker-virt
 
 This is a minimal Docker install for vmware, virtualbox and hyperv, based on Gentoo and systemd. Guest tools are installed and the kernel is optimised for running as a VM guest.
+
+VMWare and Virtualbox host software is also installed, but require VT-x extensions to work properly.
 
 This is a rolling release, and the kernel for the current Docker build is `{{docker_version}}`. The kernel build is `{{kernel_version}}`.
 

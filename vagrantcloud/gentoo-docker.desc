@@ -1,1 +1,1 @@
-Rolling Docker image ({{docker_version}}) for hyperv and virtualbox, based on Gentoo with a VM-optimised kernel ({{kernel_version}})
+Rolling Docker image ({{docker_version}}) for vmware, hyperv and virtualbox, based on Gentoo with a VM-optimised kernel ({{kernel_version}})

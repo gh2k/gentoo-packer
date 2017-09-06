@@ -8,6 +8,9 @@
       "type": "shell",
       "scripts": [
         "scripts/netfs.sh",
+        "scripts/docker.sh",
+        "scripts/vmware.sh",
+        "scripts/virtualbox.sh",
         "scripts/get_versions.sh"
       ],
       "execute_command": "sudo '{{ .Path }}'"
@@ -29,8 +32,7 @@
       "type": "virtualbox-iso",
       "boot_command": [
         "<enter><wait10>",
-        "40<enter><wait10>",
-        "<wait10><wait10>",
+        "40<enter><wait10><wait10><wait10>",
         "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
         "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
         "chmod +x provision_gentoo.sh && ./provision_gentoo.sh<enter>"
@@ -48,7 +50,7 @@
       "ssh_port": 22,
       "ssh_timeout": "4h",
       "shutdown_command": "sudo systemctl poweroff",
-      "vm_name": "gentoo-minimal",
+      "vm_name": "gentoo-docker-virt",
       "guest_additions_mode": "disable",
       "vboxmanage": [
         ["modifyvm", "{{.Name}}", "--memory", "4096"],
@@ -77,7 +79,7 @@
       "ssh_port": 22,
       "ssh_timeout": "4h",
       "shutdown_command": "sudo systemctl poweroff",
-      "vm_name": "gentoo-minimal",
+      "vm_name": "gentoo-docker-virt",
       "vmx_data": {
         "cpuid.coresPerSocket": "1",
         "memsize": "4096",
@@ -88,8 +90,7 @@
       "type": "hyperv-iso",
       "boot_command": [
         "<enter><wait10>",
-        "40<enter><wait10>",
-        "<wait10><wait10>",
+        "40<enter><wait10><wait10><wait10>",
         "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
         "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
         "chmod +x provision_gentoo.sh && ./provision_gentoo.sh<enter>"
@@ -105,7 +106,7 @@
       "ssh_port": 22,
       "ssh_timeout": "4h",
       "shutdown_command": "sudo systemctl poweroff",
-      "vm_name": "gentoo-minimal",
+      "vm_name": "gentoo-docker-virt",
       "generation": 1,
       "ram_size": "4096",
       "enable_dynamic_memory": false,
@@ -116,12 +117,12 @@
     [
       {
         "type": "vagrant",
-        "output": "boxen/gentoo-minimal-{{.Provider}}.box"
+        "output": "boxen/gentoo-docker-virt-{{.Provider}}.box"
       },
       {
         "type": "vagrant-cloud",
         "access_token": "{{user `token`}}",
-        "box_tag": "symbols/gentoo-minimal",
+        "box_tag": "symbols/gentoo-docker-virt",
         "version": "{{user `version`}}",
         "no_release": true
       }
