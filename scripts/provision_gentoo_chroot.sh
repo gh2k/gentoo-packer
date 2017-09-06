@@ -60,7 +60,7 @@ elif [ "$(dmidecode -s system-product-name)" == "VMware Virtual Platform" ]; the
   echo "app-emulation/open-vm-tools ~amd64" > /etc/portage/package.accept_keywords/vmware
   emerge app-emulation/open-vm-tools
 
-  systemctl enable vmware-tools
+  systemctl enable vmtoolsd
 else
   echo "Unknown hypervisor! :(" 1>&2
   exit 1
