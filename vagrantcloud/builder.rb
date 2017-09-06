@@ -5,7 +5,7 @@ require 'uri'
 
 def get_version(box, token)
   response = JSON.parse(
-    Curl::Easy.http_get("https://atlas.hashicorp.com/api/v1/box/symbols/#{box}") do |curl|
+    Curl::Easy.http_get("https://app.vagrantup.com/api/v1/box/symbols/#{box}") do |curl|
       curl.headers["X-Atlas-Token"] = token
     end.body
   )
@@ -25,7 +25,7 @@ def add_new_version(box, token)
     }
   }.to_json
   response = JSON.parse((
-    Curl::Easy.http_post("https://atlas.hashicorp.com/api/v1/box/symbols/#{box}/versions", version_data) do |curl|
+    Curl::Easy.http_post("https://app.vagrantup.com/api/v1/box/symbols/#{box}/versions", version_data) do |curl|
       curl.headers["X-Atlas-Token"] = token
       curl.headers['Content-Type'] = 'application/json'
     end
@@ -55,7 +55,7 @@ def update_version_description(box, version, token)
     }
   }.to_json
   response = JSON.parse((
-    Curl::Easy.http_put("https://atlas.hashicorp.com/api/v1/box/symbols/#{box}",  box_data) do |curl|
+    Curl::Easy.http_put("https://app.vagrantup.com/api/v1/box/symbols/#{box}",  box_data) do |curl|
       curl.headers["X-Atlas-Token"] = token
       curl.headers['Content-Type'] = 'application/json'
     end
@@ -68,7 +68,7 @@ def update_version_description(box, version, token)
     }
   }.to_json
   response = JSON.parse((
-    Curl::Easy.http_put("https://atlas.hashicorp.com/api/v1/box/symbols/#{box}/version/#{version}", version_data) do |curl|
+    Curl::Easy.http_put("https://app.vagrantup.com/api/v1/box/symbols/#{box}/version/#{version}", version_data) do |curl|
       curl.headers["X-Atlas-Token"] = token
       curl.headers['Content-Type'] = 'application/json'
     end
