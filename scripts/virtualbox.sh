@@ -8,7 +8,7 @@ echo "app-emulation/virtualbox-modules" >> /etc/portage/package.accept_keywords/
 
 echo "app-emulation/virtualbox headless -qt5 -opengl" > /etc/portage/package.use/virtualbox
 
-emerge app-emulation/virtualbox \
+emerge app-emulation/virtualbox \ 
        app-emulation/virtualbox-modules \
        --autounmask-continue
 
