@@ -8,5 +8,7 @@ echo "app-emulation/docker overlay -device-mapper" > /etc/portage/package.use/do
 
 emerge app-emulation/docker
 
+sed -i 's/fd:\/\//fd:\/\/ -H 0.0.0.0:2375/' /usr/lib/systemd/system/docker.service
+
 systemctl enable docker.service
 usermod -aG docker vagrant
