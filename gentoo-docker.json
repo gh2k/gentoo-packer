@@ -1,8 +1,4 @@
 {
-  "variables": {
-    "token": "{{env `VAGRANT_CLOUD_TOKEN`}}",
-    "version": "{{env `VAGRANT_BOX_VERSION`}}"
-  },
   "provisioners": [
     {
       "type": "shell",
@@ -116,13 +112,6 @@
       {
         "type": "vagrant",
         "output": "boxen/gentoo-docker-{{.Provider}}.box"
-      },
-      {
-        "type": "vagrant-cloud",
-        "access_token": "{{user `token`}}",
-        "box_tag": "symbols/gentoo-docker",
-        "version": "{{user `version`}}",
-        "no_release": true
       }
     ]
   ]
