@@ -89,7 +89,7 @@
         "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
         "chmod +x provision_gentoo.sh && ./provision_gentoo.sh<enter>"
       ],
-      "boot_wait": "10s",
+      "boot_wait": "30s",
       "disk_size": 32768,
       "http_directory": ".",
       "iso_url": "http://sd.ai/gentoo.php",
