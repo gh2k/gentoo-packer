@@ -20,6 +20,12 @@
     {
       "type": "shell",
       "script": "scripts/cleanup.sh",
+      "execute_command": "sudo '{{ .Path }}'",
+      "expect_disconnect": true
+    },
+    {
+      "type": "shell",
+      "script": "scripts/zerofree.sh",
       "execute_command": "sudo '{{ .Path }}'"
     }
   ],

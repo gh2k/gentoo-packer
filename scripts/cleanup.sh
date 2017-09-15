@@ -18,38 +18,10 @@ rm -rf /usr/portage
 rm -rf /var/tmp/*
 rm -rf /root/*
 
-echo "Cleaning the boot volume"
+echo "Rebooting with read-only file system"
 
-zerofree /dev/sda1
+# remount the root fs read-only
+# we do it this way because stopping services has proven to be fairly unreliable
 
-echo "Cleaning swap space"
-
-swapoff /dev/sda2
-dd if=/dev/zero of=/dev/sda2 bs=16M || echo Finished
-mkswap /dev/sda2
-
-echo "Remounting root filesystem read-only"
-
-if [ "$(dmidecode -s system-product-name)" == "VMware Virtual Platform" ]; then
-  systemctl stop vmtoolsd.service
-fi
-
-for service in hv_kvp_daemon.service \
-  systemd-resolved.service \
-  systemd-networkd.socket \
-  systemd-networkd.service \
-  systemd-journald.socket \
-  systemd-journald-dev-log.socket \
-  systemd-journald-audit.socket \
-  systemd-journald.service \
-  dbus.socket \
-  dbus.service
-do
-  systemctl stop $service
-done
-
-mount -o remount,ro /
-
-echo "Cleaning the root volume"
-
-zerofree -v /dev/sda3
+sed -i 's/noatime    0 1/noatime,ro 0 1/' /etc/fstab
+systemctl reboot
