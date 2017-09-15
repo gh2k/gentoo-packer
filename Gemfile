@@ -1,6 +1,5 @@
 # frozen_string_literal: true
 source "https://rubygems.org"
 
-gem "curb"
+gem "vagrant_cloud"
 gem "rake"
-gem "semantic"
