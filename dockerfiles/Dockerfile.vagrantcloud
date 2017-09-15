@@ -1,0 +1,5 @@
+FROM symbols/minimal-ruby:2.4_3.4
+
+RUN apk update && \
+    apk upgrade && \
+    apk add --no-cache alpine-sdk
