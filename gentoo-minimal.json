@@ -24,9 +24,11 @@
     {
       "type": "virtualbox-iso",
       "boot_command": [
-        "<enter><wait10>",
-        "40<enter><wait10>",
-        "<wait10><wait10>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
         "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
         "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
         "chmod +x provision_gentoo.sh && ./provision_gentoo.sh<enter>"
@@ -54,8 +56,11 @@
     {
       "type": "vmware-iso",
       "boot_command": [
-        "<enter><wait10>",
-        "40<enter><wait10><wait10><wait10>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
         "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
         "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
         "chmod +x provision_gentoo.sh && ./provision_gentoo.sh<enter>"
@@ -83,20 +88,11 @@
     {
       "type": "hyperv-iso",
       "boot_command": [
-        "<enter><wait5>",
-        "<enter><wait5>",
-        "<enter><wait5>",
-        "<enter><wait5>",
-        "<enter><wait5>",
-        "<enter><wait5>",
-        "<enter><wait5>",
-        "<enter><wait5>",
-        "<enter><wait5>",
-        "<enter><wait5>",
-        "<enter><wait5>",
-        "<enter><wait5>",
-        "<enter><wait5>",
-        "<enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
         "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
         "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
         "chmod +x provision_gentoo.sh && ./provision_gentoo.sh<enter>"
