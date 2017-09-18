@@ -88,8 +88,9 @@
       "vm_name": "gentoo-docker",
       "vmx_data": {
         "cpuid.coresPerSocket": "1",
-	      "memsize": "4096",
-	      "numvcpus": "4"
+        "memsize": "4096",
+        "numvcpus": "4",
+        "ethernet0.connectionType": "bridged"
       }
     },
     {
