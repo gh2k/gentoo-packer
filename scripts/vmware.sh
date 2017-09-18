@@ -25,5 +25,7 @@ emerge app-emulation/vmware-workstation \
        app-emulation/vmware-modules \
        --autounmask-continue
 
+emerge --config vmware-workstation
+
 systemctl enable vmware.target
 
