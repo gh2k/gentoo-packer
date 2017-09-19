@@ -25,3 +25,9 @@ echo "Rebooting with read-only file system"
 
 sed -i 's/noatime    0 1/noatime,ro 0 1/' /etc/fstab
 systemctl reboot
+
+# sleep until we get kicked out by systemd, so packer doesn't reconnect before
+# we're ready
+
+sleep 600
+
