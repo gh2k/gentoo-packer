@@ -37,8 +37,9 @@ namespace :packer do
 
           puts "Uploading #{provider} provider for #{box} version #{version}"
           fn = "boxen/#{box}-#{provider}.box"
-          p = v.ensure_provider(provider, fn)
-          raise "Failed to upload" unless p
+          p = v.ensure_provider(provider, nil)
+          raise "Failed to create provider" unless p
+          raise "Failed to upload file" unless p.upload_file(fn)
 
           b.update(description_markdown: md, short_description: description)
           v.update(description: description)
