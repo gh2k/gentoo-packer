@@ -99,6 +99,7 @@ mkdir -p /mnt/gentoo/etc/{kernels,default}
 wget ${CONFIG_SERVER_URI}/gentoo/genkernel.conf -O /mnt/gentoo/etc/genkernel.conf
 wget ${CONFIG_SERVER_URI}/gentoo/kernel_config -O /mnt/gentoo/etc/kernels/kernel_config
 wget ${CONFIG_SERVER_URI}/gentoo/default_grub -O /mnt/gentoo/etc/default/grub
+wget ${CONFIG_SERVER_URI}/gentoo/dhcpcd.conf -O /mnt/gentoo/etc/dhcpcd.conf
 
 mkdir -p /mnt/gentoo/usr/lib/systemd/system
 wget ${CONFIG_SERVER_URI}/gentoo/hv_fcopy_daemon.service -O /mnt/gentoo/usr/lib/systemd/system/hv_fcopy_daemon.service
