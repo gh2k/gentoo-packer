@@ -129,8 +129,11 @@
     [
       {
         "type": "vagrant",
-        "output": "boxen/gentoo-minimal-{{.Provider}}.box"
+        "output": "{{user `outfile`}}"
       }
     ]
-  ]
+  ],
+  "variables": {
+    "outfile": "boxen/gentoo-minimal-{{.Provider}}.box"
+  }
 }

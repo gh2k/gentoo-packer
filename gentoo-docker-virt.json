@@ -132,8 +132,11 @@
     [
       {
         "type": "vagrant",
-        "output": "boxen/gentoo-docker-virt-{{.Provider}}.box"
+        "output": "{{user `outfile`}}"
       }
     ]
-  ]
+  ],
+  "variables": {
+    "outfile": "boxen/gentoo-minimal-{{.Provider}}.box"
+  }
 }
