@@ -3,7 +3,7 @@
 set -e
 set -x
 
-emerge sys-fs/zerofree
+emerge sys-fs/zerofree sys-fs/shake
 
 echo "Removing uneeded packages"
 
@@ -17,6 +17,10 @@ make clean
 rm -rf /usr/portage
 rm -rf /var/tmp/*
 rm -rf /root/*
+
+echo "Defragmenting root filesystem"
+
+shake / > /dev/null 2>&1
 
 echo "Rebooting with read-only file system"
 
