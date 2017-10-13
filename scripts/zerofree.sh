@@ -17,3 +17,6 @@ echo "Zero-freeing root filesystem"
 zerofree /dev/sda3
 mount -o remount,rw /
 sed -i 's/,ro/   /' /etc/fstab
+
+rm /etc/machine-id
+touch /etc/machine-id

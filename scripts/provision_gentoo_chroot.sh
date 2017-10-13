@@ -69,12 +69,12 @@ fi
 # Set up the things we need for a base system
 echo "Configuring up the base system"
 
-# sudo, dhcp client and cron
+# sudo and cron
 echo "app-admin/sudo -sendmail" > /etc/portage/package.use/sudo
-emerge net-misc/dhcpcd sys-process/cronie app-admin/sudo
+emerge sys-process/cronie app-admin/sudo
 
 # systemd setup and hostname
-systemd-machine-id-setup
+systemd-machine-id-setup  --commit # remember to remove this before packaging the box
 echo "gentoo-minimal" > /etc/hostname
 echo "127.0.1.1 gentoo-minimal.local gentoo-minimal" >> /etc/hosts
 
@@ -85,6 +85,9 @@ Name=eth0
 
 [Network]
 DHCP=yes
+
+[DHCP]
+ClientIdentifier=mac
 EOT
 
 systemctl enable systemd-networkd.service
