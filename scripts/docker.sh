@@ -8,7 +8,12 @@ echo "app-emulation/docker overlay -device-mapper" > /etc/portage/package.use/do
 
 emerge app-emulation/docker
 
-sed -i 's/fd:\/\//fd:\/\/ -H 0.0.0.0:2375/' /usr/lib/systemd/system/docker.service
-
 systemctl enable docker.service
 usermod -aG docker vagrant
+
+mkdir -p /etc/systemd/system/docker.service.d
+cat <<EOF > /etc/systemd/system/docker.service.d/tcp_listen.conf
+[Service]
+ExecStart=
+ExecStart=/usr/bin/dockerd -H fd:// -H tcp://0.0.0.0:2375
+EOF
