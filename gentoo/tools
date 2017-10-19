@@ -5,3 +5,4 @@ sys-process/iotop
 net-analyzer/tcpdump
 app-misc/screen
 app-editors/vim
+net-analyzer/netcat
