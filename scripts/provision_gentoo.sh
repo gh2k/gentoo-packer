@@ -109,7 +109,7 @@ mkdir -p /mnt/gentoo/etc/portage/sets
 wget ${CONFIG_SERVER_URI}/gentoo/tools -O /mnt/gentoo/etc/portage/sets/tools
 
 mkdir -p /mnt/gentoo/etc/portage/patches/app-emulation/virtualbox-modules-5.1.30
-wget ${CONFIG_SERVER_URI}/gentoo/virtualbox-modules-5.1.30-udp.patch -o /mnt/gentoo/etc/portage/patches/app-emulation/virtualbox-modules-5.1.30/udp.patch
+wget ${CONFIG_SERVER_URI}/gentoo/virtualbox-modules-5.1.30-udp.patch -O /mnt/gentoo/etc/portage/patches/app-emulation/virtualbox-modules-5.1.30/udp.patch
 
 # enter the chroot and run the in-chroot script
 echo "Entering chroot"
