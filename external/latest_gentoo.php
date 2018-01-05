@@ -19,7 +19,7 @@ function getContent($url) {
     return $result;
 }
 
-$u = $_GET['file'] == 'stage3' ? 'http://mirror.bytemark.co.uk/gentoo/releases/amd64/autobuilds/latest-stage3-amd64-nomultilib.txt' : 'http://mirror.bytemark.co.uk/gentoo/releases/amd64/autobuilds/latest-install-amd64-minimal.txt';
+$u = $_GET['file'] == 'stage3' ? 'http://mirror.bytemark.co.uk/gentoo/releases/amd64/autobuilds/latest-stage3-amd64-systemd.txt' : 'http://mirror.bytemark.co.uk/gentoo/releases/amd64/autobuilds/latest-install-amd64-minimal.txt';
 
 $location = explode(' ',explode("\n", getContent($u))[2])[0];
 $location = "http://mirror.bytemark.co.uk/gentoo/releases/amd64/autobuilds/$location";
