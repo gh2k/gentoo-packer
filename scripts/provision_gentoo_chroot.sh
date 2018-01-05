@@ -7,6 +7,10 @@ set -x
 echo "Syncing Portage"
 emerge-webrsync && emerge --sync --quiet
 
+# Set the portage profile
+eselect profile set default/linux/amd64/17.1/systemd
+. /etc/profile
+
 # Install updates
 echo "Updating system"
 emerge -uDN @world
@@ -15,6 +19,7 @@ emerge -uDN @world
 echo "Setting locale"
 locale-gen
 eselect locale set "en_GB.utf8"
+
 . /etc/profile
 
 # Grab the kernel sources
