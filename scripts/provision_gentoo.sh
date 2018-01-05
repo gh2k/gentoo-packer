@@ -52,7 +52,7 @@ mount /dev/sda3 /mnt/gentoo
 mkdir -p /mnt/gentoo/boot
 mount /dev/sda1 /mnt/gentoo/boot
 
-curl -SsLl "http://sd.ai/gentoo.php?file=stage3" | tar xjp -C /mnt/gentoo --xattrs --numeric-owner
+curl -SsLl "http://sd.ai/gentoo.php?file=stage3" | tar xp -J -C /mnt/gentoo --xattrs --numeric-owner
 
 # modify the chroot with some custom settings
 echo "Setting up chroot configuration"
