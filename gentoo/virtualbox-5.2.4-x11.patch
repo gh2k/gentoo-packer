@@ -1,0 +1,38 @@
+--- a/trunk/src/VBox/HostServices/SharedClipboard/x11-stub.cpp
++++ b/trunk/src/VBox/HostServices/SharedClipboard/x11-stub.cpp
+@@ -56,5 +56,5 @@
+                           bool fHeadless)
+ {
+-    NOREF(pClient, fHeadless);
++    RT_NOREF(pClient, fHeadless);
+     LogFlowFunc(("called, returning VINF_SUCCESS.\n"));
+     return VINF_SUCCESS;
+@@ -78,5 +78,5 @@
+ void vboxClipboardDisconnect (VBOXCLIPBOARDCLIENTDATA *pClient)
+ {
+-    NOREF(pClient);
++    RT_NOREF(pClient);
+     LogFlowFunc(("called, returning.\n"));
+ }
+@@ -92,5 +92,5 @@
+                                   uint32_t u32Formats)
+ {
+-    NOREF(pClient, u32Formats);
++    RT_NOREF(pClient, u32Formats);
+     LogFlowFunc(("called, returning.\n"));
+ }
+@@ -108,5 +108,5 @@
+                            void *pv, uint32_t cb, uint32_t *pcbActual)
+ {
+-    NOREF(pClient, u32Format, pv, cb);
++    RT_NOREF(pClient, u32Format, pv, cb);
+     LogFlowFunc(("called, returning VINF_SUCCESS.\n"));
+     /* No data available. */
+@@ -126,5 +126,5 @@
+                              uint32_t cb, uint32_t u32Format)
+ {
+-    NOREF(pClient, pv, cb, u32Format);
++    RT_NOREF(pClient, pv, cb, u32Format);
+     LogFlowFunc(("called, returning.\n"));
+ }
+
