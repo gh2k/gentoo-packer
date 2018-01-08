@@ -1,5 +1,5 @@
---- a/trunk/src/VBox/HostServices/SharedClipboard/x11-stub.cpp
-+++ b/trunk/src/VBox/HostServices/SharedClipboard/x11-stub.cpp
+--- a/src/VBox/HostServices/SharedClipboard/x11-stub.cpp
++++ b/src/VBox/HostServices/SharedClipboard/x11-stub.cpp
 @@ -56,5 +56,5 @@
                            bool fHeadless)
  {
