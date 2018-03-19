@@ -19,7 +19,7 @@ echo "app-emulation/vmware-modules::vmware" >> /etc/portage/package.unmask
 
 echo "x11-libs/cairo aqua X" > /etc/portage/package.use/vmware
 echo "dev-cpp/cairomm aqua X" >> /etc/portage/package.use/vmware
-echo "app-emulation/vmware-workstation server bundled-libs" >> /etc/portage/package.use/vmware
+echo "app-emulation/vmware-workstation server bundled-libs vix ovftool" >> /etc/portage/package.use/vmware
 
 emerge app-emulation/vmware-workstation \
        app-emulation/vmware-modules \
