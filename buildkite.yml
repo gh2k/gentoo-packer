@@ -1,0 +1,51 @@
+steps:
+  - command: "packer build --only=vmware-iso --var outfile=boxen/gentoo-docker-virt-vmware_desktop.box --var headless=true gentoo-docker-virt.json"
+    label: "docker-virt-vmware"
+    agents:
+      - "packer=true"
+      - "vmware=true"
+    artifact_paths: "boxen/*.box"
+
+  - command: "packer build --only=virtualbox-iso --var outfile=boxen/gentoo-docker-virt-virtualbox.box --var headless=true gentoo-docker-virt.json"
+    label: "docker-virt-virtualbox"
+    agents:
+      - "packer=true"
+      - "virtualbox=true"
+    artifact_paths: "boxen/*.box"
+
+  - command: "packer build --only=vmware-iso --var outfile=boxen/gentoo-docker-vmware_desktop.box --var headless=true gentoo-docker.json"
+    label: "docker-vmware"
+    agents:
+      - "packer=true"
+      - "vmware=true"
+    artifact_paths: "boxen/*.box"
+
+  - command: "packer build --only=virtualbox-iso --var outfile=boxen/gentoo-docker-virtualbox.box --var headless=true gentoo-docker.json"
+    label: "docker-virtualbox"
+    agents:
+      - "packer=true"
+      - "virtualbox=true"
+    artifact_paths: "boxen/*.box"
+
+  - command: "packer build --only=vmware-iso --var outfile=boxen/gentoo-minimal-vmware_desktop.box --var headless=true gentoo-minimal.json"
+    label: "minimal-vmware"
+    agents:
+      - "packer=true"
+      - "vmware=true"
+    artifact_paths: "boxen/*.box"
+
+  - command: "packer build --only=virtualbox-iso --var outfile=boxen/gentoo-minimal-virtualbox.box --var headless=true gentoo-minimal.json"
+    label: "minimal-virtualbox"
+    agents:
+      - "packer=true"
+      - "virtualbox=true"
+    artifact_paths: "boxen/*.box"
+
+  - block
+
+  - command: "buildkite-agent artifact download boxen/* && git clone https://git.widgit.com/scm/online/vagrantcloud_uploader.git && cd vagrantcloud_uploader && docker pull symbols/minimal-ruby:2.4_3.4 && docker run --rm -v `pwd`:/build -e VAGRANT_CLOUD_TOKEN=$VAGRANT_CLOUD_TOKEN symbols/minimal-ruby:2.4_3.4 /build/build.sh"
+    label: "Deploy boxen"
+
+  - block
+
+  - trigger: "create-build-worker-vm-images"
