@@ -27,5 +27,14 @@ emerge app-emulation/vmware-workstation \
 
 emerge --config vmware-workstation
 
+# required to keep the vagrant plugin happy :rolleyes:
+cat <<EOF > /etc/init.d/vmware
+#!/bin/bash
+
+echo OK
+exit 0
+EOF
+chmod +x /etc/init.d/vmware
+
 systemctl enable vmware.target
 
