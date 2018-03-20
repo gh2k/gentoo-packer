@@ -41,11 +41,11 @@ steps:
       - "virtualbox=true"
     artifact_paths: "boxen/*.box"
 
-  - block
+  - wait
 
-  - command: "buildkite-agent artifact download boxen/* && git clone https://git.widgit.com/scm/online/vagrantcloud_uploader.git && cd vagrantcloud_uploader && docker pull symbols/minimal-ruby:2.4_3.4 && docker run --rm -v `pwd`:/build -e VAGRANT_CLOUD_TOKEN=$VAGRANT_CLOUD_TOKEN symbols/minimal-ruby:2.4_3.4 /build/build.sh"
+  - command: "git clone https://git.widgit.com/scm/online/vagrantcloud_uploader.git && cd vagrantcloud_uploader && buildkite-agent artifact download boxen/* boxen/ && docker pull symbols/minimal-ruby:2.4_3.4 && docker run --rm -v `pwd`:/build -e VAGRANT_CLOUD_TOKEN=$VAGRANT_CLOUD_TOKEN symbols/minimal-ruby:2.4_3.4 /build/build.sh"
     label: "Deploy boxen"
 
-  - block
+  - wait
 
   - trigger: "create-build-worker-vm-images"
