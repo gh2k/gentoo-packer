@@ -7,6 +7,10 @@ steps:
     artifact_paths:
       - "boxen/*.box"
       - "tmp/**/*"
+    retry:
+      automatic:
+        exit_status: "*"
+        limit: 3
 
   - command: "packer build --only=virtualbox-iso --var outfile=boxen/gentoo-docker-virt-virtualbox.box --var headless=true gentoo-docker-virt.json"
     label: "docker-virt-virtualbox"
@@ -16,6 +20,10 @@ steps:
     artifact_paths:
       - "boxen/*.box"
       - "tmp/**/*"
+    retry:
+      automatic:
+        exit_status: "*"
+        limit: 3
 
   - command: "packer build --only=hyperv-iso --var outfile=boxen/gentoo-docker-virt-hyperv.box --var headless=true gentoo-docker-virt.json"
     label: "docker-virt-hyperv"
@@ -25,6 +33,10 @@ steps:
     artifact_paths:
       - "boxen/*.box"
       - "tmp/**/*"
+    retry:
+      automatic:
+        exit_status: "*"
+        limit: 3
 
   - command: "packer build --only=vmware-iso --var outfile=boxen/gentoo-docker-vmware_desktop.box --var headless=true gentoo-docker.json"
     label: "docker-vmware"
@@ -34,6 +46,10 @@ steps:
     artifact_paths:
       - "boxen/*.box"
       - "tmp/**/*"
+    retry:
+      automatic:
+        exit_status: "*"
+        limit: 3
 
   - command: "packer build --only=virtualbox-iso --var outfile=boxen/gentoo-docker-virtualbox.box --var headless=true gentoo-docker.json"
     label: "docker-virtualbox"
@@ -43,6 +59,10 @@ steps:
     artifact_paths:
       - "boxen/*.box"
       - "tmp/**/*"
+    retry:
+      automatic:
+        exit_status: "*"
+        limit: 3
 
   - command: "packer build --only=hyperv-iso --var outfile=boxen/gentoo-docker-hyperv.box --var headless=true gentoo-docker.json"
     label: "docker-hyperv"
@@ -52,6 +72,10 @@ steps:
     artifact_paths:
       - "boxen/*.box"
       - "tmp/**/*"
+    retry:
+      automatic:
+        exit_status: "*"
+        limit: 3
 
   - command: "packer build --only=vmware-iso --var outfile=boxen/gentoo-minimal-vmware_desktop.box --var headless=true gentoo-minimal.json"
     label: "minimal-vmware"
@@ -61,6 +85,10 @@ steps:
     artifact_paths:
       - "boxen/*.box"
       - "tmp/**/*"
+    retry:
+      automatic:
+        exit_status: "*"
+        limit: 3
 
   - command: "packer build --only=virtualbox-iso --var outfile=boxen/gentoo-minimal-virtualbox.box --var headless=true gentoo-minimal.json"
     label: "minimal-virtualbox"
@@ -70,6 +98,10 @@ steps:
     artifact_paths:
       - "boxen/*.box"
       - "tmp/**/*"
+    retry:
+      automatic:
+        exit_status: "*"
+        limit: 3
 
   - command: "packer build --only=hyperv-iso --var outfile=boxen/gentoo-minimal-hyperv.box --var headless=true gentoo-minimal.json"
     label: "minimal-hyperv"
@@ -79,6 +111,10 @@ steps:
     artifact_paths:
       - "boxen/*.box"
       - "tmp/**/*"
+    retry:
+      automatic:
+        exit_status: "*"
+        limit: 3
 
   - wait
 
