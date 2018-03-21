@@ -17,6 +17,15 @@ steps:
       - "boxen/*.box"
       - "tmp/**/*"
 
+  - command: "packer build --only=hyperv-iso --var outfile=boxen/gentoo-docker-virt-hyperv.box --var headless=true gentoo-docker-virt.json"
+    label: "docker-virt-hyperv"
+    agents:
+      - "packer=true"
+      - "hyperv=true"
+    artifact_paths:
+      - "boxen/*.box"
+      - "tmp/**/*"
+
   - command: "packer build --only=vmware-iso --var outfile=boxen/gentoo-docker-vmware_desktop.box --var headless=true gentoo-docker.json"
     label: "docker-vmware"
     agents:
@@ -35,6 +44,15 @@ steps:
       - "boxen/*.box"
       - "tmp/**/*"
 
+  - command: "packer build --only=hyperv-iso --var outfile=boxen/gentoo-docker-hyperv.box --var headless=true gentoo-docker.json"
+    label: "docker-hyperv"
+    agents:
+      - "packer=true"
+      - "hyperv=true"
+    artifact_paths:
+      - "boxen/*.box"
+      - "tmp/**/*"
+
   - command: "packer build --only=vmware-iso --var outfile=boxen/gentoo-minimal-vmware_desktop.box --var headless=true gentoo-minimal.json"
     label: "minimal-vmware"
     agents:
@@ -49,6 +67,15 @@ steps:
     agents:
       - "packer=true"
       - "virtualbox=true"
+    artifact_paths:
+      - "boxen/*.box"
+      - "tmp/**/*"
+
+  - command: "packer build --only=hyperv-iso --var outfile=boxen/gentoo-minimal-hyperv.box --var headless=true gentoo-minimal.json"
+    label: "minimal-hyperv"
+    agents:
+      - "packer=true"
+      - "hyperv=true"
     artifact_paths:
       - "boxen/*.box"
       - "tmp/**/*"
