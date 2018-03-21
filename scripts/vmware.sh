@@ -57,5 +57,7 @@ network2.name = "NAT"
 network2.device = "vmnet8"
 EOF
 
-systemctl enable vmware.target
+# disabled due to issues when bootstrapping new boxes under vmware.
+# enable when ready
+# systemctl enable vmware.target
 
