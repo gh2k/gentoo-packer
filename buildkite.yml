@@ -123,4 +123,4 @@ steps:
 
   - wait
 
-  - trigger: "create-build-worker-vm-images"
+  - trigger: "build-ci-agent-vm-images"
