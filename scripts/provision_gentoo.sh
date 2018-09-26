@@ -52,7 +52,11 @@ mount /dev/sda3 /mnt/gentoo
 mkdir -p /mnt/gentoo/boot
 mount /dev/sda1 /mnt/gentoo/boot
 
-curl -SsLl "http://vagrant.widgit.com/gentoo.php?file=stage3" | tar xp -J -C /mnt/gentoo --xattrs --numeric-owner
+while [ "a" != "b" ]
+do
+  curl -SsLl "http://vagrant.widgit.com/gentoo.php?file=stage3" | tar xp -J -C /mnt/gentoo --xattrs --numeric-owner && break || true
+  sleep 30
+done
 
 # modify the chroot with some custom settings
 echo "Setting up chroot configuration"
