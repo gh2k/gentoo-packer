@@ -25,7 +25,7 @@ steps:
         exit_status: "*"
         limit: 3
 
-  - command: "packer build --only=hyperv-iso --var outfile=boxen/gentoo-docker-virt-hyperv.box --var headless=true --var hyperv_switchname=external gentoo-docker-virt.json"
+  - command: "packer build --only=hyperv-iso --var outfile=boxen/gentoo-docker-virt-hyperv.box --var headless=true --var hyperv_switchname=Ethernet gentoo-docker-virt.json"
     label: "docker-virt-hyperv"
     agents:
       - "packer=true"
@@ -64,7 +64,7 @@ steps:
         exit_status: "*"
         limit: 3
 
-  - command: "packer build --only=hyperv-iso --var outfile=boxen/gentoo-docker-hyperv.box --var headless=true --var hyperv_switchname=external gentoo-docker.json"
+  - command: "packer build --only=hyperv-iso --var outfile=boxen/gentoo-docker-hyperv.box --var headless=true --var hyperv_switchname=Ethernet gentoo-docker.json"
     label: "docker-hyperv"
     agents:
       - "packer=true"
@@ -103,7 +103,7 @@ steps:
         exit_status: "*"
         limit: 3
 
-  - command: "packer build --only=hyperv-iso --var outfile=boxen/gentoo-minimal-hyperv.box --var headless=true --var hyperv_switchname=external gentoo-minimal.json"
+  - command: "packer build --only=hyperv-iso --var outfile=boxen/gentoo-minimal-hyperv.box --var headless=true --var hyperv_switchname=Ethernet gentoo-minimal.json"
     label: "minimal-hyperv"
     agents:
       - "packer=true"
