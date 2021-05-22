@@ -1,7 +1,121 @@
 {
+  "builders": [
+    {
+      "boot_command": [
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
+        "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
+        "chmod +x provision_gentoo.sh \u0026\u0026 ./provision_gentoo.sh<enter>"
+      ],
+      "boot_wait": "10s",
+      "communicator": "ssh",
+      "disk_size": 32768,
+      "guest_additions_mode": "disable",
+      "guest_os_type": "Gentoo_64",
+      "headless": "true",
+      "http_directory": ".",
+      "iso_url": "http://vagrant.widgit.com/gentoo.php",
+      "shutdown_command": "sudo systemctl poweroff",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_timeout": "4h",
+      "ssh_username": "vagrant",
+      "type": "virtualbox-iso",
+      "vboxmanage": [
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--memory",
+          "4096"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--cpus",
+          "4"
+        ]
+      ],
+      "vm_name": "gentoo-docker-virt"
+    },
+    {
+      "boot_command": [
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
+        "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
+        "chmod +x provision_gentoo.sh \u0026\u0026 ./provision_gentoo.sh<enter>"
+      ],
+      "boot_wait": "10s",
+      "communicator": "ssh",
+      "disk_size": 32768,
+      "guest_os_type": "other3xlinux-64",
+      "headless": "true",
+      "http_directory": ".",
+      "iso_url": "http://vagrant.widgit.com/gentoo.php",
+      "shutdown_command": "sudo systemctl poweroff",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_timeout": "4h",
+      "ssh_username": "vagrant",
+      "type": "vmware-iso",
+      "vm_name": "gentoo-docker-virt",
+      "vmx_data": {
+        "cpuid.coresPerSocket": "4",
+        "ethernet0.connectionType": "nat",
+        "ethernet0.pcislotnumber": "32",
+        "ethernet0.present": "TRUE",
+        "ethernet0.virtualDev": "e1000",
+        "memsize": "4096",
+        "numvcpus": "4"
+      }
+    },
+    {
+      "boot_command": [
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
+        "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
+        "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
+        "chmod +x provision_gentoo.sh \u0026\u0026 ./provision_gentoo.sh<enter>"
+      ],
+      "boot_wait": "10s",
+      "communicator": "ssh",
+      "cpus": 4,
+      "disk_size": 32768,
+      "enable_dynamic_memory": false,
+      "generation": 1,
+      "http_directory": ".",
+      "iso_url": "http://vagrant.widgit.com/gentoo.php",
+      "memory": "4096",
+      "shutdown_command": "sudo systemctl poweroff",
+      "ssh_password": "vagrant",
+      "ssh_port": 22,
+      "ssh_timeout": "4h",
+      "ssh_username": "vagrant",
+      "type": "hyperv-iso",
+      "vm_name": "gentoo-docker-virt"
+    }
+  ],
+  "post-processors": [
+    [
+      {
+        "output": "{{user `outfile`}}",
+        "type": "vagrant"
+      }
+    ]
+  ],
   "provisioners": [
     {
-      "type": "shell",
+      "execute_command": "sudo '{{ .Path }}'",
       "scripts": [
         "scripts/netfs.sh",
         "scripts/docker.sh",
@@ -9,134 +123,28 @@
         "scripts/virtualbox.sh",
         "scripts/get_versions.sh"
       ],
-      "execute_command": "sudo '{{ .Path }}'"
+      "type": "shell"
     },
     {
-      "type": "file",
-      "source": "/tmp/versions/",
       "destination": "./tmp",
-      "direction": "download"
+      "direction": "download",
+      "source": "/tmp/versions/",
+      "type": "file"
     },
     {
-      "type": "shell",
-      "script": "scripts/cleanup.sh",
       "execute_command": "sudo '{{ .Path }}'",
-      "expect_disconnect": true
+      "expect_disconnect": true,
+      "script": "scripts/cleanup.sh",
+      "type": "shell"
     },
     {
-      "type": "shell",
+      "execute_command": "sudo '{{ .Path }}'",
       "script": "scripts/zerofree.sh",
-      "execute_command": "sudo '{{ .Path }}'"
+      "type": "shell"
     }
-  ],
-  "builders": [
-    {
-      "type": "virtualbox-iso",
-      "boot_command": [
-        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
-        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
-        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
-        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
-        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
-        "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
-        "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
-        "chmod +x provision_gentoo.sh && ./provision_gentoo.sh<enter>"
-      ],
-      "boot_wait": "10s",
-      "disk_size": 32768,
-      "http_directory": ".",
-      "guest_os_type": "Gentoo_64",
-      "headless": "true",
-      "iso_url": "http://vagrant.widgit.com/gentoo.php",
-      "iso_checksum_type": "none",
-      "communicator": "ssh",
-      "ssh_username": "vagrant",
-      "ssh_password": "vagrant",
-      "ssh_port": 22,
-      "ssh_timeout": "4h",
-      "shutdown_command": "sudo systemctl poweroff",
-      "vm_name": "gentoo-docker-virt",
-      "guest_additions_mode": "disable",
-      "vboxmanage": [
-        ["modifyvm", "{{.Name}}", "--memory", "4096"],
-        ["modifyvm", "{{.Name}}", "--cpus", "4"]
-      ]
-    },
-    {
-      "type": "vmware-iso",
-      "boot_command": [
-        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
-        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
-        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
-        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
-        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
-        "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
-        "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
-        "chmod +x provision_gentoo.sh && ./provision_gentoo.sh<enter>"
-      ],
-      "boot_wait": "10s",
-      "disk_size": 32768,
-      "http_directory": ".",
-      "guest_os_type": "other3xlinux-64",
-      "headless": "true",
-      "iso_url": "http://vagrant.widgit.com/gentoo.php",
-      "iso_checksum_type": "none",
-      "communicator": "ssh",
-      "ssh_username": "vagrant",
-      "ssh_password": "vagrant",
-      "ssh_port": 22,
-      "ssh_timeout": "4h",
-      "shutdown_command": "sudo systemctl poweroff",
-      "vm_name": "gentoo-docker-virt",
-      "vmx_data": {
-        "cpuid.coresPerSocket": "4",
-        "memsize": "4096",
-        "numvcpus": "4",
-        "ethernet0.virtualDev": "e1000",
-        "ethernet0.connectionType": "nat",
-        "ethernet0.present": "TRUE",
-        "ethernet0.pcislotnumber": "32"
-      }
-    },
-    {
-      "type": "hyperv-iso",
-      "boot_command": [
-        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
-        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
-        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
-        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
-        "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
-        "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
-        "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
-        "chmod +x provision_gentoo.sh && ./provision_gentoo.sh<enter>"
-      ],
-      "boot_wait": "10s",
-      "disk_size": 32768,
-      "http_directory": ".",
-      "iso_url": "http://vagrant.widgit.com/gentoo.php",
-      "iso_checksum_type": "none",
-      "communicator": "ssh",
-      "ssh_username": "vagrant",
-      "ssh_password": "vagrant",
-      "ssh_port": 22,
-      "ssh_timeout": "4h",
-      "shutdown_command": "sudo systemctl poweroff",
-      "vm_name": "gentoo-docker-virt",
-      "generation": 1,
-      "ram_size": "4096",
-      "enable_dynamic_memory": false,
-      "cpu": 4
-    }
-  ],
-  "post-processors": [
-    [
-      {
-        "type": "vagrant",
-        "output": "{{user `outfile`}}"
-      }
-    ]
   ],
   "variables": {
     "outfile": "boxen/gentoo-minimal-{{.Provider}}.box"
   }
 }
+
