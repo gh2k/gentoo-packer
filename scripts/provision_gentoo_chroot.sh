@@ -8,7 +8,7 @@ echo "Syncing Portage"
 emerge-webrsync && emerge --sync --quiet
 
 # Set the portage profile
-eselect profile set default/linux/amd64/17.0/systemd
+eselect profile set default/linux/amd64/17.1/systemd
 . /etc/profile
 
 # Install updates
