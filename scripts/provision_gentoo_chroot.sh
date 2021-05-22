@@ -29,7 +29,7 @@ emerge sys-kernel/gentoo-sources
 # Install kernel build tools and configure
 echo "Preparing to build kernel"
 
-emerge sys-kernel/genkernel-next sys-boot/grub sys-fs/fuse sys-apps/dmidecode
+emerge sys-kernel/genkernel sys-boot/grub sys-fs/fuse sys-apps/dmidecode
 
 if [ "$(dmidecode -s system-manufacturer)" == "Microsoft Corporation" ]; then
   # Ensure hyperv modules are loaded at boot, and included in the initramfs
