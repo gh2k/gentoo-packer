@@ -9,7 +9,7 @@
         "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
         "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
         "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
-        "chmod +x provision_gentoo.sh \u0026\u0026 ./provision_gentoo.sh<enter>"
+        "chmod +x provision_gentoo.sh \u0026\u0026 ./provision_gentoo.sh {{user `stage3url`}}<enter>"
       ],
       "boot_wait": "10s",
       "communicator": "ssh",
@@ -18,7 +18,8 @@
       "guest_os_type": "Gentoo_64",
       "headless": "true",
       "http_directory": ".",
-      "iso_url": "http://vagrant.widgit.com/gentoo.php",
+      "iso_url": "{{user `isourl`}}",
+      "iso_checksum": "file:{{user `checksumurl`}}",
       "shutdown_command": "sudo systemctl poweroff",
       "ssh_password": "vagrant",
       "ssh_port": 22,
@@ -50,7 +51,7 @@
         "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
         "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
         "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
-        "chmod +x provision_gentoo.sh \u0026\u0026 ./provision_gentoo.sh<enter>"
+        "chmod +x provision_gentoo.sh \u0026\u0026 ./provision_gentoo.sh {{user `stage3url`}}<enter>"
       ],
       "boot_wait": "10s",
       "communicator": "ssh",
@@ -58,7 +59,8 @@
       "guest_os_type": "other3xlinux-64",
       "headless": "true",
       "http_directory": ".",
-      "iso_url": "http://vagrant.widgit.com/gentoo.php",
+      "iso_url": "{{user `isourl`}}",
+      "iso_checksum": "file:{{user `checksumurl`}}",
       "shutdown_command": "sudo systemctl poweroff",
       "ssh_password": "vagrant",
       "ssh_port": 22,
@@ -85,7 +87,7 @@
         "<enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5><enter><wait5>",
         "wget http://{{ .HTTPIP }}:{{ .HTTPPort }}/scripts/provision_gentoo.sh<enter><wait>",
         "echo http://{{ .HTTPIP }}:{{ .HTTPPort }} > /root/config_server_uri<enter>",
-        "chmod +x provision_gentoo.sh \u0026\u0026 ./provision_gentoo.sh<enter>"
+        "chmod +x provision_gentoo.sh \u0026\u0026 ./provision_gentoo.sh {{user `stage3url`}}<enter>"
       ],
       "boot_wait": "10s",
       "communicator": "ssh",
@@ -94,7 +96,8 @@
       "enable_dynamic_memory": false,
       "generation": 1,
       "http_directory": ".",
-      "iso_url": "http://vagrant.widgit.com/gentoo.php",
+      "iso_url": "{{user `isourl`}}",
+      "iso_checksum": "file:{{user `checksumurl`}}",
       "memory": "4096",
       "shutdown_command": "sudo systemctl poweroff",
       "ssh_password": "vagrant",
@@ -142,7 +145,10 @@
     }
   ],
   "variables": {
-    "outfile": "boxen/gentoo-minimal-{{.Provider}}.box"
+    "outfile": "boxen/gentoo-minimal-{{.Provider}}.box",
+    "isourl": "",
+    "checksumurl": "",
+    "stage3url": ""
   }
 }
 

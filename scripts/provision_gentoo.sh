@@ -52,16 +52,7 @@ mount /dev/sda3 /mnt/gentoo
 mkdir -p /mnt/gentoo/boot
 mount /dev/sda1 /mnt/gentoo/boot
 
-while [ "a" != "b" ]
-do
-  DECOMPRESS_FLAG=$(curl -w "%{redirect_url}" -o /dev/null -s "http://vagrant.widgit.com/gentoo.php?file=stage3" | egrep 'bz2$' > /dev/null && echo "j" || echo "-J")
-  if [ "x$DECOMPRESS_FLAG" == "x-J" ]; then
-    DECOMPRESS_FLAG=' -J'
-  fi
-
-  curl -SsLl "http://vagrant.widgit.com/gentoo.php?file=stage3" | tar xp$DECOMPRESS_FLAG -C /mnt/gentoo --xattrs --numeric-owner && break
-  sleep 30
-done
+curl -SsLl $1 | tar xJp -C /mnt/gentoo --xattrs --numeric-owner
 
 # modify the chroot with some custom settings
 echo "Setting up chroot configuration"
