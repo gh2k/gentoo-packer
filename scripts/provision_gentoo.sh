@@ -61,7 +61,8 @@ echo "Setting up chroot configuration"
 cat >> /mnt/gentoo/etc/portage/make.conf <<EOT
 MAKEOPTS="-j5"
 EMERGE_DEFAULT_OPTS="--quiet-build --jobs=4 --load-average=4 --autounmask-continue"
-USE="-doc"
+USE="-doc -gnome -kde headless bash-completion"
+ACCEPT_LICENSE="*"
 EOT
 
 # use systemd
