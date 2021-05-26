@@ -78,6 +78,10 @@ echo "Configuring up the base system"
 echo "app-admin/sudo -sendmail" > /etc/portage/package.use/sudo
 emerge sys-process/cronie app-admin/sudo
 
+# Disable passwdqc
+echo "sys-auth/pambase -passwdqc" > /etc/portage/package.use/pam
+emerge -1 sys-auth/pambase
+
 # systemd setup and hostname
 systemd-machine-id-setup  --commit # remember to remove this before packaging the box
 echo "gentoo-minimal" > /etc/hostname
